@@ -54,25 +54,23 @@ start 'C:\Users\Aylin\workspace\github.com\yildiria\tgdb_ws1718\sql'
 Lasse dir alle vorhanden Fahrzeugklassen aus der Tabelle `VEHICLE_TYPE` ausgeben. Suche nun nach allen Benutzern (`SURNAME`, `FORNAME`), die ein Auto besitzen.
 
 #### Lösung
-```sql
-Deine Lösung
-```
+SELECT VEHICLE_TYPE_NAME
+FROM VEHICLE_TYPE;
+
+
 
 ### Aufgabe 7
 Kombiniere aus Aufgabe 6 beide Abfrage zu einer Abfrage.
 
-#### Lösung
-```sql
-Deine Lösung
-```
+
 
 ### Aufgabe 8
 Modifizierde die Aufgabe 7 so, dass nur der Benutzer mit der `ACCOUNT_ID` = `7` angezeigt wird.
 
-#### Lösung
-```sql
-Deine Lösung
-```
+SELECT SURNAME
+FROM ACCOUNT 
+INNER JOIN ACC_VEHIC.ACCOUNT_ID
+WHERE ACCOUNT_ID=7;
 
 ### Aufgabe 9
 Erstelle für dich einen neuen Benutzer.
