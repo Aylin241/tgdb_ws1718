@@ -42,7 +42,7 @@ Die folgende Abbildung beschreibt eine Beziehung zwischen Tabellen. Sie wird auc
 Was bedeutet der Buchstabe `P` und `F` neben den Attributen von Tabellen?
 
 #### Lösung
-> Primary Key und Foreign Key
+> P=Primary Key und F=Foreign Key
 
 ### Aufgabe 5
 Importiere die SQL-Dump-Datei in dein eigenes Schema. Wie lautet dazu der Befehl um dem import zu starten?
