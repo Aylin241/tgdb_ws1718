@@ -1,0 +1,98 @@
+1.)
+CREATE TABLE RESIDENCE 
+  (
+    RESIDENCE_ID NUMBER(38) NOT NULL,
+    ADDRESS_ID NUMBER(38) NOT NULL,
+    STREET VARCHAR(32) NOT NULL,
+    CONSTRAINT PK_RESIDENCE PRIMARY KEY (RESIDENCE_ID),
+    CONSTRAINT FK_ADDRESS FOREIGN KEY (ADDRESS_ID) REFERENCES ADDRESS(ADDRESS_ID)
+  );
+  
+ALTER TABLE ACCOUNT
+    ADD (FIRST_RESIDENCE NUMBER(38),
+         SECOND_RESIDENCE NUMBER(38),
+         CONSTRAINT FK_FIRST_RESIDENCE FOREIGN KEY (FIRST_RESIDENCE) REFERENCES RESIDENCE(RESIDENCE_ID),
+         CONSTRAINT FK_SECOND_RESIDENCE FOREIGN KEY (SECOND_RESIDENCE) REFERENCES RESIDENCE(RESIDENCE_ID));
+		 
+		blabla 
+create table residence ( 
+res_id number(5) not null,
+street varchar(40) not null,
+plz number(5) not null,
+city varchar(32) not null);
+
+create table res_acc (
+account_id number(38) not null,
+first_res_id number(38) not null,
+second_res_id number(38));	 
+		 
+		 
+		 
+		 
+2.)		 
+ALTER TABLE GAS_STATION
+    ADD (GPS_POS_X NUMBER(10,5),
+         GPS_POS_Y NUMBER(10,5));	
+
+
+blabla
+alter table gas_station
+add (x_coord number(10,5),
+     y_coord number(10,5));
+
+3.)))))
+select distinct account_id
+from receipt
+where extract(YEAR from c_date) = 2017
+and price_l*liter*(1+duty_amount) > (Select avg(price_l*liter*(1+duty_amount)) from receipt);
+Für Liter:
+select distinct account_id
+from receipt
+where extract(YEAR from c_date) = 2017
+and receipt.liter > (Select avg(liter) from receipt);		 
+		 
+4.1)
+SELECT *
+ FROM all_tab_privs
+ WHERE table_schema = 'SCOTT';	
+
+4.2)
+SELECT * 
+ FROM user_role_privs; 
+ 
+4.3)
+SELECT *
+ FROM role_role_privs 
+ WHERE granted_role = 'FH_TRIER';
+ 
+4.4)
+select * from role_role_privs;
+dept gibt keine rechte an rollen, sonder direkt an public
+ 
+5.)
+select extract(year from c_date) jahr, p.provider_name Anbieter,
+street Straße, a.plz, a.city Stadt, c.country_name Land, sum(price_l*liter*(1+r.duty_amount)) Umsatz
+from receipt r
+inner join gas_station gs on r.gas_station_id = gs.gas_station_id
+inner join provider p on gs.provider_id = p.provider_id
+inner join address a on gs.address_id = a.address_id
+inner join country c on gs.country_id = c.country_id
+group by c_date, p.provider_name, street, a.plz, a.city,c.country_name
+order by extract(year from c_date), p.provider_name,
+street, a.plz, a.city, c.country_name; 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
