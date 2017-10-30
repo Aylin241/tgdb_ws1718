@@ -17,7 +17,7 @@ Um genauere Informationen und Prognosen mit Data Mining Werkzeugen zu schöpfen,
 
 #### Lösung
 ```sql
-Deine Lösung
+blabla
 ```
 
 ### Aufgabe 2
