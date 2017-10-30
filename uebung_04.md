@@ -17,7 +17,7 @@ Um genauere Informationen und Prognosen mit Data Mining Werkzeugen zu schöpfen,
 
 #### Lösung
 ```sql
-blabla
+
 ```
 
 ### Aufgabe 2
@@ -25,7 +25,9 @@ Als App Entwickler/in für Android und iOS möchtest du dich nicht darauf verlas
 
 #### Lösung
 ```sql
-Deine Lösung
+alter table gas_station
+add (x_coord number(10,5),
+     y_coord number(10,5));
 ```
 
 ### Aufgabe 3
@@ -33,7 +35,15 @@ Welche Kunden haben im Jahr 2017 mehr als den Durchschnitt getank?
 
 #### Lösung
 ```sql
-Deine Lösung
+select distinct account_id
+from receipt
+where extract(YEAR from c_date) = 2017
+and price_l*liter*(1+duty_amount) > (Select avg(price_l*liter*(1+duty_amount)) from receipt);
+Für Liter:
+select distinct account_id
+from receipt
+where extract(YEAR from c_date) = 2017
+and receipt.liter > (Select avg(liter) from receipt);	
 ```
 
 ### Aufgabe 4
@@ -44,7 +54,9 @@ Wurden die Tabellen-Rechte direkt an dich bzw. an `PUBLIC` vergeben?
 
 ##### Lösung
 ```sql
-Deine Lösung
+SELECT *
+ FROM all_tab_privs
+ WHERE table_schema = 'SCOTT';	
 ```
 
 #### Aufgabe 4.2
@@ -52,7 +64,8 @@ Welche Rollen besitzt du direkt?
 
 ##### Lösung
 ```sql
-Deine Lösung
+SELECT * 
+ FROM user_role_privs; 
 ```
 
 #### Aufgabe 4.3
@@ -60,7 +73,9 @@ Welche Rollen haben die Rollen?
 
 ##### Lösung
 ```sql
-Deine Lösung
+SELECT *
+ FROM role_role_privs 
+ WHERE granted_role = 'FH_TRIER';
 ```
 
 #### Aufgabe 4.4
@@ -68,7 +83,8 @@ Haben die Rollen Rechte an `SCOTT.EMP` oder `SCOTT.DEPT`?
 
 ##### Lösung
 ```sql
-Deine Lösung
+select * from role_role_privs;
+dept gibt keine rechte an rollen, sonder direkt an public
 ```
 
 ### Aufgabe 5
@@ -83,7 +99,16 @@ Es soll für jede Tankstelle der Umsatz einzelner Jahre aufgelistet werden auf B
 
 #### Lösung
 ```sql
-Deine Lösung
+select extract(year from c_date) jahr, p.provider_name Anbieter,
+street Straße, a.plz, a.city Stadt, c.country_name Land, sum(price_l*liter*(1+r.duty_amount)) Umsatz
+from receipt r
+inner join gas_station gs on r.gas_station_id = gs.gas_station_id
+inner join provider p on gs.provider_id = p.provider_id
+inner join address a on gs.address_id = a.address_id
+inner join country c on gs.country_id = c.country_id
+group by c_date, p.provider_name, street, a.plz, a.city,c.country_name
+order by extract(year from c_date), p.provider_name,
+street, a.plz, a.city, c.country_name; 
 ```
 
 
