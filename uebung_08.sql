@@ -1,15 +1,10 @@
 1.) /*
 Prezedur, die das anlegen von Benutzern duch übergabe von Paramentern ermöglicht
 */
-
 Create or replace PROCEDURE benutzer (surname IN VARCHAR2, forename IN VARCHAR2, email IN VARCHAR2, c_date IN DATE, u_date IN DATE) 
-
 AS
-
 v_id account.account_id%TYPE;
-
 BEGIN
-
 select max(account_id) +1 INTO v_id 
 from account;
 
